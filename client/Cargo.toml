@@ -1,0 +1,18 @@
+[package]
+name = "xforce-terminal-contracts-client"
+version = "0.1.0"
+edition = "2021"
+description = "Rust client for XForce Terminal contracts"
+
+[dependencies]
+anchor-client = "0.32.1"
+anchor-lang = "0.32.1"
+solana-client = "3.0.10"
+solana-sdk = "3.0.0"
+solana-program = "3.0.0"
+anyhow = "1.0.100"
+thiserror = "2.0.17"
+
+[dev-dependencies]
+tokio = { version = "1.48.0", features = ["full"] }
+

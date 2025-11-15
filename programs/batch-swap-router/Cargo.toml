@@ -1,0 +1,24 @@
+[package]
+name = "batch-swap-router"
+version = "0.1.0"
+description = "Batch swap router for XForce Terminal"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "batch_swap_router"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+[dependencies]
+anchor-lang = { workspace = true }
+anchor-spl = { workspace = true }
+
+[lints.rust]
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(target_os, values("solana"))'] }
+

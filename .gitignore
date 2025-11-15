@@ -1,0 +1,57 @@
+# Rust
+target/
+**/*.rs.bk
+*.pdb
+Cargo.lock
+
+# Anchor
+.anchor/
+test-ledger/
+.DS_Store
+
+# IDL files (generated) - but keep target/idl for reference
+target/idl/*.json
+!target/idl/.gitkeep
+
+# Keys and sensitive files
+*.json
+!package.json
+!package-lock.json
+!tsconfig.json
+id.json
+*.key
+*-keypair.json
+target/deploy/*.json
+target/deploy/*.so
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+*.so
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Reference directory (large, optional)
+# Uncomment if you want to exclude reference code
+# reference/
