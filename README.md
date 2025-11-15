@@ -106,7 +106,7 @@ xforce-terminal-contracts/
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-org/xforce-terminal-contracts.git
+git clone https://github.com/trilltino/xforce-terminal-contracts.git
 cd xforce-terminal-contracts
 
 # Install dependencies
@@ -213,4 +213,5 @@ If you find this project useful, please consider giving it a star! ⭐
 *Free and Open Source Software for the Solana Ecosystem*
 
 </div>
+
 
