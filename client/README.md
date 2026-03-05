@@ -1,99 +1,71 @@
-# XForce Terminal Contracts Client
+# Client
 
-Rust client library for interacting with XForce Terminal Solana smart contracts. This client provides a high-level, type-safe interface for interacting with the batch swap router program.
-
-## Overview
-
-The XForce Terminal Contracts Client is a Rust library that simplifies interaction with the batch swap router program on Solana. It provides:
-
-- **Type-safe APIs**: Compile-time type checking for all operations
-- **Error Handling**: Comprehensive error handling with detailed error messages
-- **Transaction Management**: Simplified transaction creation and submission
-- **Account Management**: Helper functions for account creation and management
-
-## Architecture
-
-```
-lib.rs                    # Main library entry point
-├── batch_swap_router.rs  # Batch swap router client
-├── error.rs              # Error definitions
-└── types.rs              # Type definitions
-```
-
-## Usage
-
-### Basic Usage
-
-```rust
-use xforce_terminal_contracts_client::*;
-use anchor_client::Client;
-use solana_sdk::signature::Keypair;
-
-// Create a client
-let payer = Keypair::new();
-let client = create_client("http://localhost:8899", payer)?;
-
-// Get the program
-let program_id = get_batch_swap_router_program_id();
-let program = client.program(program_id)?;
-
-// Create batch swap router client
-let swap_client = BatchSwapRouterClient::new(program);
-
-// Execute a batch swap
-let swaps = vec![
-    SwapParams {
-        input_mint: mint_a,
-        output_mint: mint_b,
-        amount: 1000,
-        min_output_amount: 900,
-    },
-];
-
-let signature = swap_client.batch_swap(swaps)?;
-```
-
-### Error Handling
-
-```rust
-use xforce_terminal_contracts_client::ContractError;
-
-match swap_client.batch_swap(swaps) {
-    Ok(signature) => println!("Transaction: {}", signature),
-    Err(ContractError::TransactionFailed(msg)) => {
-        eprintln!("Transaction failed: {}", msg);
-    }
-    Err(e) => eprintln!("Error: {}", e),
-}
-```
+Rust client library for interacting with XForce Terminal Contracts.
 
 ## Features
 
-- **Type Safety**: Compile-time type checking for all operations
-- **Error Handling**: Comprehensive error handling with detailed messages
-- **Transaction Management**: Simplified transaction creation and submission
-- **Account Management**: Helper functions for account operations
+- Type-safe program interactions
+- Account building helpers
+- Transaction construction
+- Error handling
 
-## Requirements
+## Modules
 
-- Rust 1.70.0 or later
-- Anchor framework (for program compilation)
-- Solana CLI tools (for local development)
+### lib.rs
+Main client interface and entry point.
+
+### batch_swap_router.rs
+Batch swap router program interactions.
+
+### types.rs
+Client-specific types and structures.
+
+### error.rs
+Client error types.
+
+### security.rs
+Security verification helpers.
+
+## Usage
+
+```rust
+use xforce_terminal_contracts_client::BatchSwapRouterClient;
+
+// Initialize client
+let client = BatchSwapRouterClient::new(
+    program_id,
+    payer_keypair,
+    rpc_client,
+)?;
+
+// Build swap parameters
+let swaps = vec![SwapParams {
+    input_mint: sol_mint,
+    output_mint: usdc_mint,
+    amount: 1_000_000_000,
+    min_output_amount: 90_000_000,
+}];
+
+// Execute batch swap
+let signature = client.batch_swap(swaps).await?;
+println!("Transaction: {}", signature);
+```
+
+## Dependencies
+
+- `solana-client`: RPC client
+- `solana-sdk`: Core types
+- `anchor-client`: Anchor framework
+- `spl-token`: SPL token program
 
 ## Building
 
 ```bash
-# Build the client
-cargo build
-
-# Run tests
-cargo test
-
-# Build documentation
-cargo doc --open
+cargo build --release
 ```
 
-## License
+## Testing
 
-This client is licensed under the MIT License.
-
+```bash
+cargo test
+```
